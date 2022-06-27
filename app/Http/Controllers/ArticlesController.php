@@ -21,15 +21,18 @@ class ArticlesController extends Controller
     public function index(Request $request)
     {
 
-        $data = [];
+        // $data = [];
         $user = Auth::user();
+
+        // $article = Article::with("user")->get();
+        // dd($article);
 
         // create roles
         // Role::create([
         //     'name' => "author"
         // ]);
 
-        // $user->assignRole('author');
+        $user->assignRole('author');
         $articles = Article::leftJoin('users as u', 'articles.user_id', 'u.id')
             ->select(
                 'articles.*',
@@ -59,6 +62,7 @@ class ArticlesController extends Controller
      */
     public function create()
     {
+
         return view('articles.create');
     }
 
@@ -77,6 +81,7 @@ class ArticlesController extends Controller
             $article->title = $request->title;
             $article->user_id = Auth::id();
             $article->description = $request->description;
+            $article->image_path = $request->image_path;
             $article->save();
             DB::commit();
             flash('Article created successfully')->success();
@@ -97,7 +102,9 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        //
+        $article = Article::find($id);
+        // dd($article);
+        return view('articles.show', ['article' => $article,]);
     }
 
     /**
@@ -108,7 +115,9 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::find($id);
+        // dd($article);
+        return view('articles.edit', ['article' => $article]);
     }
 
     /**
@@ -118,11 +127,18 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
-    }
+        $articlePost = Article::find($request->id);
+        // dd($articlePost);
 
+        $articlePost->update([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+        $articlePost->save();
+        return redirect()->route('articles.show', ["article" => $articlePost->id]);
+    }
     /**
      * Remove the specified resource from storage.
      *

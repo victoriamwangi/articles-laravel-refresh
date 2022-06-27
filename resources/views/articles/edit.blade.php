@@ -1,23 +1,19 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <form action="{{ route('articles.store') }}" method='post' class='p-3 bg-white shadow' enctype="multipart/form-data">
+        <form action="/articles/{{ $article->id }}" method='post' class='p-3 bg-white shadow'>
             @csrf
-            {{-- <div class="form-group">
-                <label for="">Image</label>
-                <input type="file" name="title" id="" class="form-control" placeholder=""
-                    aria-describedby="helpId" name='image'>
-
-            </div> --}}
+            @method('PUT')
+            <input type="hidden" name="id" value="{{ $article->id }}">
             <div class="form-group">
                 <label for="">Title</label>
                 <input type="text" name="title" id="" class="form-control" placeholder=""
-                    aria-describedby="helpId">
+                    value="{{ $article->title }}" required aria-describedby="helpId">
 
             </div>
             <div class="form-group">
                 <label for="">Description</label>
-                <textarea name="description" class="form-control" id="description" cols="30" rows="10"></textarea>
+                <textarea name="description" class="form-control" id="description" name='description' cols="30" rows="10">{{ $article->description }}</textarea>
 
             </div>
             <div class="form-group my-5">

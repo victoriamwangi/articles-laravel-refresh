@@ -19,6 +19,7 @@ class CreateArticlesTable extends Migration
             $table->text('description');
             $table->timestamps();
             $table->integer('user_id');
+            // $table->string('image_path');
         });
     }
 

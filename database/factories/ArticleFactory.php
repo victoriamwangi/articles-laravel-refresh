@@ -18,6 +18,7 @@ class ArticleFactory extends Factory
             'title' => $this->faker->sentence(),
             'user_id' => User::all()->random()->id,
             'description' => $this->faker->paragraph(),
+            // 'image_path' => $this->faker->sentence(),
         ];
     }
 }

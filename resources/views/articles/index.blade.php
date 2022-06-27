@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     @foreach ($articles as $article)
-        <div class="card my-2 mx-4">
+        <div class="card my-2 mx-5">
             <img class="card-img-top" src="holder.js/100x180/" alt="">
             <div class="card-body">
                 <h4 class="card-title">{{ $article->title }}</h4>
