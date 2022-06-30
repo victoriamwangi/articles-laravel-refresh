@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\ApiController;
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,9 @@ use App\Models\User;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::post('/get/articles', [ApiController::class, 'getArticles']);
+Route::post('/get/article', [ApiController::class, 'getArticle']);
 
 Route::post('/auth/register', [AuthController::class, 'register']);
 
