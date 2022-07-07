@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,6 +29,8 @@ Auth::routes();
 // Route::resource('/articles', ArticlesController::class);
 Route::get('/articles', [ArticlesController::class, 'index'])->name('articles');
 
+
 Route::middleware(['auth'])->group(function () {
     Route::resource('/articles', ArticlesController::class)->except('index');
+    Route::get('/users', [UsersController::class, 'index'])->name('users');
 });
