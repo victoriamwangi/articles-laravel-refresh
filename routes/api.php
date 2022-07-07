@@ -18,6 +18,17 @@ use App\Models\User;
 
 Route::post('/get/articles', [ApiController::class, 'getArticles']);
 Route::post('/get/article', [ApiController::class, 'getArticle']);
+// Route::post('/delete/article', [ApiController::class, 'delete']);
+Route::post('/delete/article', [ApiController::class, 'deleteArticle']);
+// Route::post('/create/article', [ApiController::class, 'create_article']);
+
+
+
+
+Route::post('/get/users', [ApiController::class, 'alluser']);
+Route::post('/get/user', [ApiController::class, 'singleuser']);
+
+
 
 Route::post('/auth/register', [AuthController::class, 'register']);
 
@@ -30,6 +41,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/me', function (Request $request) {
         return auth()->user();
     });
+    Route::post('create', [ApiController::class, 'create']);
+
 
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 });

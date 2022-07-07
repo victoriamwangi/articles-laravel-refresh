@@ -77,13 +77,29 @@ class ArticlesController extends Controller
     {
         DB::beginTransaction();
         try {
+            // if ($request->hasFile('files')) {
+
+            $path = strtotime(now()) . "." . $request->file('files')->getClientOriginalExtension();
+
+            $request->file('files')->storeAs(
+                'uploads',
+                $path,
+                'public'
+            );
+            // $path = $request->file('file')->storeAs(
+            //     'uploaded-files',
+            //     strtotime(now()) . "." . $request->file('file')->getClientOriginalName(),
+            //     'public'
+            // );
+
 
             $article = new Article();
+            $article->image_path = $path;
             $article->title = $request->title;
             $article->user_id = Auth::id();
             $article->description = $request->description;
-            $article->image_path = $request->image_path;
             $article->save();
+            // }
             DB::commit();
             flash('Article created successfully')->success();
             return redirect()->route('articles');
@@ -148,6 +164,8 @@ class ArticlesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $article = Article::find($id);
+        $article->delete();
+        return redirect()->route('articles')->with('success', 'Article deleted!');
     }
 }

@@ -25,9 +25,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('/articles', ArticlesController::class);
+// Route::resource('/articles', ArticlesController::class);
+Route::get('/articles', [ArticlesController::class, 'index'])->name('articles');
+
 Route::middleware(['auth'])->group(function () {
     Route::resource('/articles', ArticlesController::class)->except('index');
 });
-
-Route::get('/articles', [ArticlesController::class, 'index'])->name('articles');
