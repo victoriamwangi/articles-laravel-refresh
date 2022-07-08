@@ -33,4 +33,5 @@ Route::get('/articles', [ArticlesController::class, 'index'])->name('articles');
 Route::middleware(['auth'])->group(function () {
     Route::resource('/articles', ArticlesController::class)->except('index');
     Route::get('/users', [UsersController::class, 'index'])->name('users');
+    Route::post('/users/change-role', [UsersController::class, 'change_role']);
 });
