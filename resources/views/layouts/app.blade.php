@@ -68,6 +68,11 @@
                                 </li>
                             @endif
                         @else
+                            @hasrole('admin')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/users">{{ __('Users') }}</a>
+                                </li>
+                            @endhasrole
                             @hasrole('author')
                                 <li class="nav-item">
                                     <a class="nav-link" href="/articles?filter=own">{{ __('My Posts') }}</a>
@@ -76,12 +81,10 @@
                                     <a class="nav-link" href="{{ route('articles.create') }}">{{ __('Add Posts') }}</a>
                                 </li>
                             @endhasrole
-                            <li class="nav-item">
-                                <a class="nav-link" href="/users">{{ __('Users') }}</a>
-                            </li>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
 
