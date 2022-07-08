@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\HomeController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,11 +29,13 @@ Route::get('/', function () {
 Auth::routes();
 
 // Route::resource('/articles', ArticlesController::class);
-Route::get('/articles', [ArticlesController::class, 'index'])->name('articles');
+Route::get('/', [ArticlesController::class, 'index'])->name('articles');
 
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('/articles', ArticlesController::class)->except('index');
     Route::get('/users', [UsersController::class, 'index'])->name('users');
     Route::post('/users/change-role', [UsersController::class, 'change_role']);
+    Route::get('/dashboard', [HomeController::class, 'home']);
+    // Route::get('/dashboard', [Controller::class, 'dashboard']);
 });

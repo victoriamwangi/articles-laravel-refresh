@@ -30,10 +30,10 @@ class ArticlesController extends Controller
 
         // create roles
         // Role::create([
-        //     'name' => "author"
+        //     'name' => "admin"
         // ]);
 
-        $user->assignRole('author');
+        // $user->assignRole('admin');
         $articles = Article::leftJoin('users as u', 'articles.user_id', 'u.id')
             ->select(
                 'articles.*',
