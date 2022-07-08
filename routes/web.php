@@ -33,7 +33,7 @@ Route::get('/', [ArticlesController::class, 'index'])->name('articles');
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('/articles', ArticlesController::class)->except('index');
+    Route::resource('/', ArticlesController::class)->except('index');
     Route::get('/users', [UsersController::class, 'index'])->name('users');
     Route::post('/users/change-role', [UsersController::class, 'change_role']);
     Route::get('/dashboard', [HomeController::class, 'home']);
